@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.meltmedia.testing.http.harness;
+package com.github.praxissoftware.testing.http.harness;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,19 +21,22 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("exception")
-public class ExceptionResource {
+@Path("echo")
+public class EchoResource {
 
-  private final Class<? extends Throwable> exceptionClass;
+  private String echo;
 
-  public ExceptionResource(final Class<? extends Throwable> exceptionClass) {
-    this.exceptionClass = exceptionClass;
+  public EchoResource() {
+  }
+
+  public EchoResource(final String echo) {
+    this.echo = echo;
   }
 
   @GET
   @Produces(MediaType.TEXT_PLAIN)
-  public Response get() throws Throwable {
-    throw exceptionClass.newInstance();
+  public Response echo() {
+    return Response.ok(echo).header("Content-Type", "text/plain; charset=utf-8").build();
   }
 
 }

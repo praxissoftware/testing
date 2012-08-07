@@ -13,30 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.meltmedia.testing.http.harness;
+package com.github.praxissoftware.testing.http.harness;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.servlet.http.HttpServlet;
 
-@Path("echo")
-public class EchoResource {
-
-  private String echo;
-
-  public EchoResource() {
-  }
-
-  public EchoResource(final String echo) {
-    this.echo = echo;
-  }
-
-  @GET
-  @Produces(MediaType.TEXT_PLAIN)
-  public Response echo() {
-    return Response.ok(echo).header("Content-Type", "text/plain; charset=utf-8").build();
-  }
-
+/**
+ * This servlet doesn't do anything. It only exists because I believe that Jetty won't map filters unless at least one Servlet is in its context.
+ * @author Jason Rose
+ */
+public class DefaultServlet extends HttpServlet {
+  private static final long serialVersionUID = -7939154648602693438L;
 }

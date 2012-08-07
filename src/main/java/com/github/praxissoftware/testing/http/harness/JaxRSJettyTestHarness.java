@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.meltmedia.testing.http.harness;
+package com.github.praxissoftware.testing.http.harness;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,13 +29,13 @@ import org.mortbay.jetty.servlet.Context;
 import org.mortbay.jetty.servlet.FilterHolder;
 import org.mortbay.jetty.servlet.ServletHolder;
 
-import com.meltmedia.testing.http.harness.jaxrs.Application;
+import com.github.praxissoftware.testing.http.harness.jaxrs.Application;
 import com.sun.jersey.spi.container.servlet.ServletContainer;
 
 /**
  * This test harness implementation wraps an embedded Jetty instance.
  * @author Jason Rose
- *
+ * 
  */
 public class JaxRSJettyTestHarness implements HttpTestHarness {
 
@@ -74,9 +74,9 @@ public class JaxRSJettyTestHarness implements HttpTestHarness {
     try {
       server.stop();
       server.destroy();
-    } catch (final RuntimeException re) {
+    } catch( final RuntimeException re ) {
       throw re;
-    } catch (final Exception e) {
+    } catch( final Exception e ) {
       throw new RuntimeException(e);
     }
     server = null;
@@ -122,9 +122,9 @@ public class JaxRSJettyTestHarness implements HttpTestHarness {
         root.addFilter(holder, "/*", org.mortbay.jetty.Handler.DEFAULT);
       }
       server.start();
-    } catch (final RuntimeException re) {
+    } catch( final RuntimeException re ) {
       throw re;
-    } catch (final Exception e) {
+    } catch( final Exception e ) {
       throw new RuntimeException(e);
     }
   }

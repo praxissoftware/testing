@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.meltmedia.testing.http.harness;
+package com.github.praxissoftware.testing.http.harness;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,15 +60,7 @@ public class RequestFilter implements Filter {
 
     final HttpServletResponseWrapper httpResponse = new HttpServletResponseWrapper((HttpServletResponse) response) {
       @Override
-      public void setHeader(String name, String value) {
-        List<String> values = new ArrayList<String>();
-        values.add(value);
-        responseHeaders.put(name, values);
-        super.setHeader(name, value);
-      }
-
-      @Override
-      public void addHeader(String name, String value) {
+      public void addHeader(final String name, final String value) {
         List<String> values = responseHeaders.get(name);
         if( values == null ) {
           values = new ArrayList<String>();
@@ -76,6 +68,14 @@ public class RequestFilter implements Filter {
         }
         values.add(value);
         super.addHeader(name, value);
+      }
+
+      @Override
+      public void setHeader(final String name, final String value) {
+        final List<String> values = new ArrayList<String>();
+        values.add(value);
+        responseHeaders.put(name, values);
+        super.setHeader(name, value);
       }
     };
 
@@ -128,7 +128,7 @@ public class RequestFilter implements Filter {
         }
       }
     }
-    
+
     if( !responseHeaders.isEmpty() ) {
       message.append("\nResponse Headers:\n");
       for( final Entry<String, List<String>> entry : responseHeaders.entrySet() ) {

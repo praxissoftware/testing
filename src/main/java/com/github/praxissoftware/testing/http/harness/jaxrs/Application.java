@@ -13,14 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.meltmedia.testing.http.harness;
+package com.github.praxissoftware.testing.http.harness.jaxrs;
 
-import javax.servlet.http.HttpServlet;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * This servlet doesn't do anything. It only exists because I believe that Jetty won't map filters unless at least one Servlet is in its context.
+ * This is a shim to allow us to build a JAX-RS Application object with an injected set of endpoints and providers.
  * @author Jason Rose
  */
-public class DefaultServlet extends HttpServlet {
-  private static final long serialVersionUID = -7939154648602693438L;
+public class Application extends javax.ws.rs.core.Application {
+
+  private final Set<Object> context;
+
+  public Application(final Object[] context) {
+    this(new HashSet<Object>(Arrays.asList(context)));
+  }
+
+  public Application(final Set<Object> context) {
+    this.context = context;
+  }
+
+  @Override
+  public Set<Object> getSingletons() {
+    return context;
+  }
 }
