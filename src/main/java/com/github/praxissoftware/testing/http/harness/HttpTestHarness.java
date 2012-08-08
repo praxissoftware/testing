@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.meltmedia.testing.http.harness;
+package com.github.praxissoftware.testing.http.harness;
 
 import java.net.MalformedURLException;
 
 /**
  * This interface defines the generic functionality allowed to our test harnesses.
  * @author Jason Rose
- *
+ * 
  */
 public interface HttpTestHarness {
 

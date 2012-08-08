@@ -13,30 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.meltmedia.testing.http.harness.jaxrs;
+package com.github.praxissoftware.testing.http.harness;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-/**
- * This is a shim to allow us to build a JAX-RS Application object with an injected set of endpoints and providers.
- * @author Jason Rose
- */
-public class Application extends javax.ws.rs.core.Application {
+@Path("exception")
+public class ExceptionResource {
 
-  private final Set<Object> context;
+  private final Class<? extends Throwable> exceptionClass;
 
-  public Application(final Object[] context) {
-    this(new HashSet<Object>(Arrays.asList(context)));
+  public ExceptionResource(final Class<? extends Throwable> exceptionClass) {
+    this.exceptionClass = exceptionClass;
   }
 
-  public Application(final Set<Object> context) {
-    this.context = context;
+  @GET
+  @Produces(MediaType.TEXT_PLAIN)
+  public Response get() throws Throwable {
+    throw exceptionClass.newInstance();
   }
 
-  @Override
-  public Set<Object> getSingletons() {
-    return context;
-  }
 }

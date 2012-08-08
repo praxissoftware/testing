@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.meltmedia.testing.http.harness;
+package com.github.praxissoftware.testing.http.harness;
 
 import javax.servlet.Filter;
 
@@ -21,6 +21,7 @@ import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Test;
 
+import com.github.praxissoftware.testing.http.harness.JaxRSJettyTestHarness;
 import com.jayway.restassured.RestAssured;
 
 public class JaxRSJettyTestHarnessTest {
